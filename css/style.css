@@ -1,0 +1,218 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+
+    background:
+        radial-gradient(ellipse at 20% 20%, rgba(255, 0, 55, 0.19), transparent 40%),
+        radial-gradient(ellipse at 80% 75%, rgba(190, 0, 35, 0.22), transparent 45%),
+        #080609;
+}
+
+/* Nebula Glow */
+body::before {
+    content: "";
+    position: fixed;
+    inset: -50%;
+    background: radial-gradient(
+        ellipse,
+        rgba(255, 0, 50, 0.08),
+        transparent 60%
+    );
+    filter: blur(60px);
+    animation: nebula 8s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes nebula {
+    from {
+        transform: translate(-5%, -3%) scale(1);
+    }
+
+    to {
+        transform: translate(5%, 3%) scale(1.15);
+    }
+}
+
+/* Stopwatch Card */
+.container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px !important;
+    padding: 35px 28px;
+
+    background: rgba(25, 10, 17, 0.82);
+    border: 1px solid rgba(255, 35, 75, 0.35);
+    border-radius: 24px;
+
+    box-shadow:
+        0 0 25px rgba(255, 0, 55, 0.12),
+        0 0 70px rgba(255, 0, 55, 0.08),
+        inset 0 0 25px rgba(255, 0, 55, 0.04);
+
+    backdrop-filter: blur(15px);
+}
+
+/* Timer Numbers */
+.hour,
+.minute,
+.second {
+    min-width: 90px;
+    padding: 20px 12px;
+    text-align: center;
+
+    font-family: 'Orbitron', monospace;
+    font-size: 40px;
+    font-weight: 600;
+    color: #ff385b;
+
+    background: linear-gradient(145deg, #1c0b12, #10080d);
+    border: 1px solid rgba(255, 45, 80, 0.4);
+    border-radius: 14px;
+
+    text-shadow:
+        0 0 8px rgba(255, 30, 65, 0.8),
+        0 0 22px rgba(255, 0, 55, 0.35);
+
+    box-shadow:
+        inset 0 0 15px rgba(255, 0, 55, 0.06),
+        0 0 12px rgba(255, 0, 55, 0.06);
+
+    transition: 0.3s ease;
+}
+
+/* Timer Hover */
+.hour:hover,
+.minute:hover,
+.second:hover {
+    border-color: #ff1744;
+    box-shadow: 0 0 20px rgba(255, 0, 55, 0.25);
+}
+
+/* Buttons */
+button {
+    position: relative;
+    min-width: 110px;
+    padding: 13px 24px;
+    margin: 0 5px;
+
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Start */
+#start {
+    color: #fff;
+    background: linear-gradient(135deg, #ff1744, #c60032);
+    border: 1px solid #ff4668;
+    box-shadow: 0 0 18px rgba(255, 0, 55, 0.25);
+}
+
+#start:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 28px rgba(255, 0, 55, 0.5);
+}
+
+/* Stop */
+#stop {
+    color: #ff4968;
+    background: rgba(255, 20, 60, 0.08);
+    border: 1px solid #ff385b;
+}
+
+#stop:hover {
+    color: #fff;
+    background: #e50935;
+    transform: translateY(-3px);
+    box-shadow: 0 0 22px rgba(255, 0, 55, 0.35);
+}
+
+/* Reset */
+#reset {
+    color: #f5dce2;
+    background: #171016;
+    border: 1px solid #63303e;
+}
+
+#reset:hover {
+    color: #fff;
+    background: #39101d;
+    border-color: #ff385b;
+    transform: translateY(-3px);
+}
+
+/* Shake while running */
+.container.running {
+    animation: shake 0.15s infinite;
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-2px);
+    }
+
+    75% {
+        transform: translateX(2px);
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+    .container {
+        gap: 7px !important;
+        padding: 20px 12px;
+        border-radius: 18px;
+    }
+
+    .hour,
+    .minute,
+    .second {
+        min-width: 0;
+        width: 76px;
+        padding: 16px 4px;
+        font-size: 27px;
+    }
+
+    button {
+        min-width: 1;
+        padding: 11px 14px;
+        margin: 3px;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body::before,
+    .container.running {
+        animation: none;
+    }
+}
